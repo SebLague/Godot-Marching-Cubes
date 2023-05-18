@@ -1,0 +1,119 @@
+[gd_scene load_steps=9 format=3 uid="uid://bcr7ldwvca3vl"]
+
+[ext_resource type="Material" uid="uid://c16m6psb2fle8" path="res://Materials/TerrainMat.tres" id="1_um64b"]
+[ext_resource type="Script" path="res://Scripts/TerrainGenerator.gd" id="2_qk53n"]
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="3_wcmpl"]
+[ext_resource type="Material" uid="uid://bebxfywe3n14p" path="res://Materials/Player.tres" id="4_ufj0g"]
+[ext_resource type="Material" uid="uid://d18qk0dwx4lmu" path="res://Materials/Player stripe.tres" id="5_8nnkp"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_17bsy"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_e2eci"]
+
+[sub_resource type="Environment" id="Environment_q07dc"]
+background_mode = 1
+ssao_enabled = true
+ssao_radius = 9.82
+ssao_intensity = 9.0
+ssao_power = 1.39955
+ssao_detail = 0.0
+ssao_horizon = 0.08
+ssao_sharpness = 0.39
+ssao_light_affect = 1.0
+ssao_ao_channel_affect = 1.0
+glow_enabled = true
+glow_intensity = 8.0
+glow_strength = 0.43
+glow_bloom = 1.0
+glow_map_strength = 0.0
+fog_light_energy = 0.0
+fog_height_density = -10.3385
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.015
+volumetric_fog_albedo = Color(0.396078, 0.623529, 0.866667, 1)
+volumetric_fog_emission_energy = 0.0
+volumetric_fog_gi_inject = 0.71
+volumetric_fog_anisotropy = 0.79
+volumetric_fog_length = 15.75
+volumetric_fog_detail_spread = 6.0
+volumetric_fog_temporal_reprojection_amount = 0.696
+adjustment_enabled = true
+adjustment_saturation = 1.25
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Terrain" type="MeshInstance3D" parent="." node_paths=PackedStringArray("player")]
+material_override = ExtResource("1_um64b")
+script = ExtResource("2_qk53n")
+noise_offset = Vector3(152.543, -150, 100)
+iso_level = 1.11
+player = NodePath("../Player")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.941886, 0.219764, -0.254076, -0.188585, 0.971814, 0.141469, 0.278005, -0.0853322, 0.956782, -0.0190642, 11.5055, 26.5115)
+fov = 65.0
+far = 1654.3
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.99624, 0.0489368, -0.0714891, -4.23437e-09, 0.825182, 0.564866, 0.0866343, -0.562742, 0.82208, 0, 3.75176, 6.83158)
+light_color = Color(0.992157, 0.937255, 0.827451, 1)
+light_energy = 0.611
+light_indirect_energy = 0.0
+shadow_enabled = true
+shadow_bias = 0.049
+shadow_normal_bias = 1.899
+shadow_opacity = 0.51
+shadow_blur = 8.013
+directional_shadow_mode = 1
+directional_shadow_split_1 = 0.201
+directional_shadow_max_distance = 462.7
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.932343, -0.359537, -0.0383418, -0.359688, -0.933068, 0.0031233, -0.0368984, 0.0108791, -0.99926, 0, 3.75176, -3.80705)
+light_color = Color(0.501961, 0.647059, 0.831373, 1)
+light_energy = 0.165
+light_indirect_energy = 4.657
+sky_mode = 1
+
+[node name="Player" type="Node3D" parent="." node_paths=PackedStringArray("player_graphic", "camera")]
+script = ExtResource("3_wcmpl")
+speed = 25.0
+turn_speed = 0.25
+elevation_speed = 15.0
+roll_angle = 35.0
+player_graphic = NodePath("Player Graphic")
+camera = NodePath("../Camera3D")
+cam_offset = Vector3(0, 2.595, -5.53)
+cam_look_offset = Vector3(0, 1.138, 1.885)
+
+[node name="Player Graphic" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.421962, 0, 0, 0, 2.37414, 0, 0, 0)
+material_override = ExtResource("4_ufj0g")
+mesh = SubResource("BoxMesh_17bsy")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/Player Graphic"]
+transform = Transform3D(2.62537, 0, 0, 0, 0.231996, 0, 0, 0, 0.396953, 0, 0, 0.0977742)
+material_override = ExtResource("4_ufj0g")
+mesh = SubResource("BoxMesh_e2eci")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Player/Player Graphic/MeshInstance3D"]
+transform = Transform3D(0.0800701, 0, 0, 0, 1, 0, 0, 0, 0.974337, 0.449067, 0.207317, 0)
+material_override = ExtResource("5_8nnkp")
+mesh = SubResource("BoxMesh_e2eci")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Player/Player Graphic/MeshInstance3D"]
+transform = Transform3D(0.0800701, 0, 0, 0, 1, 0, 0, 0, 0.974337, -0.449, 0.207, 0)
+material_override = ExtResource("5_8nnkp")
+mesh = SubResource("BoxMesh_e2eci")
+skeleton = NodePath("../..")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Player/Player Graphic"]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0.644177)
+light_energy = 100.0
+spot_range = 500.0
+spot_angle = 19.38
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_q07dc")
