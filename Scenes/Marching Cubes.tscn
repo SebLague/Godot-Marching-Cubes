@@ -13,9 +13,9 @@
 [sub_resource type="Environment" id="Environment_q07dc"]
 background_mode = 1
 ssao_enabled = true
-ssao_radius = 9.82
-ssao_intensity = 9.0
-ssao_power = 1.39955
+ssao_radius = 7.46
+ssao_intensity = 4.0
+ssao_power = 1.17688
 ssao_detail = 0.0
 ssao_horizon = 0.08
 ssao_sharpness = 0.39
@@ -29,15 +29,16 @@ glow_map_strength = 0.0
 fog_light_energy = 0.0
 fog_height_density = -10.3385
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.015
-volumetric_fog_albedo = Color(0.396078, 0.623529, 0.866667, 1)
+volumetric_fog_density = 0.02
+volumetric_fog_albedo = Color(0.180392, 0.27451, 0.470588, 1)
 volumetric_fog_emission_energy = 0.0
 volumetric_fog_gi_inject = 0.71
-volumetric_fog_anisotropy = 0.79
+volumetric_fog_anisotropy = -0.08
 volumetric_fog_length = 15.75
 volumetric_fog_detail_spread = 6.0
 volumetric_fog_temporal_reprojection_amount = 0.696
 adjustment_enabled = true
+adjustment_contrast = 1.05
 adjustment_saturation = 1.25
 
 [node name="Node3D" type="Node3D"]
@@ -59,7 +60,7 @@ transform = Transform3D(0.99624, 0.0489368, -0.0714891, -4.23437e-09, 0.825182, 
 light_color = Color(0.992157, 0.937255, 0.827451, 1)
 light_energy = 0.611
 light_indirect_energy = 0.0
-shadow_enabled = true
+light_volumetric_fog_energy = 1.646
 shadow_bias = 0.049
 shadow_normal_bias = 1.899
 shadow_opacity = 0.51
@@ -69,10 +70,19 @@ directional_shadow_split_1 = 0.201
 directional_shadow_max_distance = 462.7
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.932343, -0.359537, -0.0383418, -0.359688, -0.933068, 0.0031233, -0.0368984, 0.0108791, -0.99926, 0, 3.75176, -3.80705)
-light_color = Color(0.501961, 0.647059, 0.831373, 1)
+transform = Transform3D(0.873924, -0.289507, 0.390438, 0.0525481, -0.742287, -0.668019, 0.483213, 0.604315, -0.633489, 0, 3.75176, -3.80705)
+light_color = Color(0.462745, 0.439216, 0.729412, 1)
 light_energy = 0.165
-light_indirect_energy = 4.657
+light_indirect_energy = 4.352
+light_volumetric_fog_energy = 4.352
+sky_mode = 1
+
+[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.213482, 0.115842, -0.970055, -0.0231207, 0.993266, 0.113526, 0.976673, -0.00180745, 0.214723, -1.20293, 0.239224, 0.0379982)
+light_color = Color(0, 0.682353, 0.388235, 1)
+light_energy = 0.165
+light_indirect_energy = 1.609
+light_volumetric_fog_energy = 4.352
 sky_mode = 1
 
 [node name="Player" type="Node3D" parent="." node_paths=PackedStringArray("player_graphic", "camera")]
@@ -98,22 +108,22 @@ material_override = ExtResource("4_ufj0g")
 mesh = SubResource("BoxMesh_e2eci")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Player/Player Graphic/MeshInstance3D"]
-transform = Transform3D(0.0800701, 0, 0, 0, 1, 0, 0, 0, 0.974337, 0.449067, 0.207317, 0)
+transform = Transform3D(0.0800701, 0, 0, 0, 1, 0, 0, 0, 0.974337, 0.449067, 0.0603382, 0)
 material_override = ExtResource("5_8nnkp")
 mesh = SubResource("BoxMesh_e2eci")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Player/Player Graphic/MeshInstance3D"]
-transform = Transform3D(0.0800701, 0, 0, 0, 1, 0, 0, 0, 0.974337, -0.449, 0.207, 0)
+transform = Transform3D(0.0800701, 0, 0, 0, 1, 0, 0, 0, 0.974337, -0.449, 0.0600212, 0)
 material_override = ExtResource("5_8nnkp")
 mesh = SubResource("BoxMesh_e2eci")
 skeleton = NodePath("../..")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Player/Player Graphic"]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0.644177)
-light_energy = 100.0
+light_energy = 200.0
 spot_range = 500.0
-spot_angle = 19.38
+spot_angle = 25.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_q07dc")

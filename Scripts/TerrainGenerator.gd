@@ -7,7 +7,7 @@ extends MeshInstance3D
 @export var chunk_scale : float = 1000
 @export var player : Node3D
 
-const resolution : int = 7
+const resolution : int = 8
 const num_waitframes_gpusync : int = 12
 const num_waitframes_meshthread : int = 90
 

@@ -6,7 +6,7 @@
 default_input_values = [0, 2.2, 1, 1.0, 2, 0.0]
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_ji0ns"]
-default_input_values = [0, 0.0, 1, 10.7]
+default_input_values = [0, 0.0, 1, 5.0]
 operator = 3
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_uok2p"]
@@ -169,7 +169,7 @@ void fragment() {
 
 
 // FloatOp:11
-	float n_in11p1 = 10.70000;
+	float n_in11p1 = 5.00000;
 	float n_out11p0 = n_out10p0 / n_in11p1;
 
 
@@ -211,7 +211,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-9, -240)
+graph_offset = Vector2(-274.489, -145.147)
 varyings/PosTest = "0,4"
 nodes/vertex/0/position = Vector2(480, 100)
 nodes/vertex/2/node = SubResource("VisualShaderNodeVaryingSetter_2tjdu")
