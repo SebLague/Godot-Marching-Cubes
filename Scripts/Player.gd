@@ -52,38 +52,19 @@ func _process(delta):
 	
 func handle_inputs(dt):
 	# Input
-	var turn_dir = get_turn_input()
-	var pitch_dir = get_pitch_input()
+	var input_dir = Input.get_vector("Left", "Right", "Down", "Up")
 	# Smooth turn
-	var turn_smooth = smooth_towards(current_turn_t, turn_dir, 0.2, curr_smooth_turn_vel, dt)
+	var turn_smooth = smooth_towards(current_turn_t, input_dir.x, 0.2, curr_smooth_turn_vel, dt)
 	current_turn_t = turn_smooth.x
 	curr_smooth_turn_vel = turn_smooth.y
 	# Smooth roll
-	var roll_smooth = smooth_towards(current_roll_t, turn_dir, 0.4, curr_smooth_roll_vel, dt)
+	var roll_smooth = smooth_towards(current_roll_t, input_dir.x, 0.4, curr_smooth_roll_vel, dt)
 	current_roll_t = roll_smooth.x
 	curr_smooth_roll_vel = roll_smooth.y
 	# Smooth putch
-	var pitch_smooth = smooth_towards(curr_pitch_t, pitch_dir, 0.5, curr_smooth_pitch_vel, dt)
+	var pitch_smooth = smooth_towards(curr_pitch_t, input_dir.y, 0.5, curr_smooth_pitch_vel, dt)
 	curr_pitch_t = pitch_smooth.x
 	curr_smooth_pitch_vel = pitch_smooth.y
-	
-func get_turn_input() -> float : 
-	var t = 0
-	if Input.is_action_pressed("Left"):
-		t += -1
-	if Input.is_action_pressed("Right"):
-		t += 1
-	return t
-	
-func get_pitch_input() -> float : 
-	var t = 0
-	if Input.is_action_pressed("Down"):
-		t += -1
-	if Input.is_action_pressed("Up"):
-		t += 1
-	return t
-	
-
 	
 func smooth_towards(curr, target, duration, curr_velocity, dt) -> Vector2:
 	# from unity smoothdamp implementation
